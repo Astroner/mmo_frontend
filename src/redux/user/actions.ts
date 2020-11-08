@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getProfile } from "@/api/user";
-import { Storage } from "@/helpers/storage";
+import { Storage } from "@/helpers/Storage";
 
 export const login = createAsyncThunk("@user/login", async (token: string) => {
     const profile = await getProfile(token);
