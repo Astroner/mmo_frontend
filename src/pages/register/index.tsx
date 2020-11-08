@@ -3,11 +3,9 @@ import Password from "antd/lib/input/Password";
 import { GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
 
-import { login as loginCall } from "@/api/user";
+import { register } from "@/api/user";
 import { useUser } from "@/helpers/hooks/useUser";
-import { login } from "@/redux/user/actions";
 
 import cn from "./Register.module.scss";
 import { AxiosError } from "axios";
@@ -19,13 +17,11 @@ const Register: NextPage = () => {
 
     const { token } = useUser();
 
-    const dispatch = useDispatch();
-
     const submit = useCallback(
         async (data: { username: string; password: string }) => {
             try {
-                const { token } = await loginCall(data.username, data.password);
-                dispatch(login(token));
+                await register(data.username, data.password);
+                router.push("/login");
             } catch (e) {
                 if (e.isAxiosError) {
                     const err: AxiosError = e;
@@ -33,7 +29,7 @@ const Register: NextPage = () => {
                 }
             }
         },
-        [dispatch]
+        [router]
     );
 
     useEffect(() => {
