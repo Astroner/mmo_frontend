@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { useEffect, useMemo } from "react";
 
 import { createStore } from "@/redux/store";
-import { Storage } from "@/helpers/storage";
+import { Storage } from "@/helpers/Storage";
 import { login } from "@/redux/user/actions";
 
 import "./global.scss";
